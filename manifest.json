@@ -1,11 +1,11 @@
 {
-	"id": "quincy-hub-first-plugin",
-	"name": "Quincy Hub First Plugin",
+	"id": "quincy-hub-date-hopper",
+	"name": "Date Hopper",
 	"version": "1.0.0",
 	"minAppVersion": "0.15.0",
-	"description": "This is a sample plugin for Obsidian. This plugin demonstrates some of the capabilities of the Obsidian API.",
+	"description": "Commands to insert and modify dates.",
 	"author": "quincy-hub",
 	"authorUrl": "https://github.com/quincy-hub",
-	"fundingUrl": "https://obsidian.md/pricing",
+	"fundingUrl": "",
 	"isDesktopOnly": false
 }

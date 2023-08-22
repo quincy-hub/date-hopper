@@ -1,14 +1,8 @@
 import { MomentInput } from 'moment';
 import { App, Editor, MarkdownView, Modal, Notice, Plugin, PluginSettingTab, Setting, moment } from 'obsidian';
 
-export default class QuincyFirstPlugin extends Plugin {
+export default class DateHopper extends Plugin {
 	async onload() {
-		new Notice("Hello")
-
-		this.addRibbonIcon("calendar-days", "Awesomenes", () => {
-			new Notice('Hi from ribbon')
-		})
-
 		this.addCommand({
 			id: "next-day",
 			name: "Add a day",
@@ -70,6 +64,7 @@ export default class QuincyFirstPlugin extends Plugin {
 
 	}
 
+
 	dateInRange(editor:Editor) {
 		const cursor = editor.getCursor()
 		const lineStr = editor.getLine(cursor.line)
@@ -99,6 +94,7 @@ export default class QuincyFirstPlugin extends Plugin {
 		return cursorDate
 	}
 
+
 	adjustDate(editor: Editor, interval: moment.unitOfTime.DurationConstructor, value: moment.DurationInputArg1){
 		const cursorDate = this.dateInRange(editor)
 		if (cursorDate){
@@ -114,8 +110,6 @@ export default class QuincyFirstPlugin extends Plugin {
 			new Notice(`No Date found under cursor.`, 3000)
 		}
 	}
-
-
 
 
 	insertDate(editor: Editor, selection: string){

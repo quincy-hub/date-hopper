@@ -1,7 +1,7 @@
 {
-	"name": "quincy-hub-first-plugin",
+	"name": "quincy-hub-date-hopper",
 	"version": "1.0.0",
-	"description": "This is a testing plugin for Obsidian (https://obsidian.md)",
+	"description": "Commands to insert and modify dates.",
 	"main": "main.js",
 	"scripts": {
 		"dev": "node esbuild.config.mjs",
