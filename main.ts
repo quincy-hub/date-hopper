@@ -3,6 +3,7 @@ import { App, Editor, MarkdownView, Modal, Notice, Plugin, PluginSettingTab, Set
 
 export default class DateHopper extends Plugin {
 	async onload() {
+		// Alter Commands
 		this.addCommand({
 			id: "next-day",
 			name: "Add a day",
@@ -35,6 +36,7 @@ export default class DateHopper extends Plugin {
 			},
 		})
 
+		// Insert Commands
 		this.addCommand({
 			id: "insert-today",
 			name: "Insert Today",
