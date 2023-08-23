@@ -1,8 +1,43 @@
 import { MomentInput } from 'moment';
 import { App, Editor, MarkdownView, Modal, Notice, Plugin, PluginSettingTab, Setting, moment } from 'obsidian';
+import { DateHopperSettingsTab } from 'settings';
+
+interface DateHopperPluginSettings {
+	endOfWeek: string
+}
+
+
+const DEFAULT_SETTINGS: Partial<DateHopperPluginSettings> = {
+	endOfWeek: 'Friday',
+}
+
 
 export default class DateHopper extends Plugin {
+	settings: DateHopperPluginSettings
+
+	async loadSettings() {
+		// Bring data from data.json in the plugin directory, this creates a clone of the object so you don't update the defaults in the data.json file when you change settings.
+		this.settings = Object.assign(
+			{},
+			DEFAULT_SETTINGS,
+			await this.loadData()
+		);
+	}
+
+	async saveSettings(){
+		this.saveData(this.settings)
+	}
+
 	async onload() {
+		await this.loadSettings()
+		
+		this.addSettingTab(new DateHopperSettingsTab(this.app, this))
+		
+		this.addRibbonIcon("eye", "Testing Settings", () => {
+			new Notice(this.settings.endOfWeek)
+		})
+		
+		
 		// Alter Commands
 		this.addCommand({
 			id: "next-day",
@@ -60,6 +95,9 @@ export default class DateHopper extends Plugin {
 				this.insertDate(editor, 'insert-yesterday')
 			}
 		})
+
+
+		this.addStatusBarItem()
 	}
 
 	async onunload() {
