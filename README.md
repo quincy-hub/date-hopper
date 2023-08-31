@@ -5,6 +5,9 @@ A simple plugin that adds commands to insert dates and modify dates that are und
 ## 1.0.0
 Initial release, just getting started here.  
 
+## 1.0.1
+- Adds day of the week to the status bar when cursor in date. 
+
 
 ## Known limiations (Future Plans)
 - No support for date formats other than YYYY-MM-DD
