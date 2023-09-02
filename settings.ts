@@ -1,12 +1,12 @@
 import DateHopper from "main";
-import { App, PluginSettingTab, Setting } from "obsidian";
+import { App, DropdownComponent, PluginSettingTab, Setting } from "obsidian";
+import { DateTime, Settings as LuxSettings, Info as LuxInfo } from "luxon";
 
 export class DateHopperSettingsTab extends PluginSettingTab {
     plugin: DateHopper
 
     constructor(app: App, plugin: DateHopper){
         super(app, plugin)   
-
         this.plugin = plugin
     }
     
@@ -15,16 +15,22 @@ export class DateHopperSettingsTab extends PluginSettingTab {
         containerEl.empty();
 
         new Setting(containerEl)
-            .setName("End of Week Dropdown")
-        .setDesc("Day to use for End of week as Dropdown")
+            .setName("End of Workweek Dropdown")
+            .setDesc("Day to use for End of work week")
+            .addDropdown(dropdown => {
+                this.addDaysToDropdown(dropdown)
+                dropdown.setValue(this.plugin.settings.endOfWorkWeek)
+                dropdown.onChange(value => {
+                    this.plugin.settings.endOfWorkWeek = value
+                    this.plugin.saveSettings()
+                })
+        })
+
+        new Setting(containerEl)
+        .setName("End of Week Dropdown")
+        .setDesc("Day to use for End of week")
         .addDropdown(dropdown => {
-            dropdown.addOption('sunday', 'Sunday')
-            dropdown.addOption('monday', 'Monday')
-            dropdown.addOption('tuesday', 'Tuesday')
-            dropdown.addOption('wednesday', 'Wednesday')
-            dropdown.addOption('thursday', 'Thursday')
-            dropdown.addOption('friday', 'Friday')
-            dropdown.addOption('saturday', 'Saturday')
+            this.addDaysToDropdown(dropdown)
             dropdown.setValue(this.plugin.settings.endOfWeek)
             dropdown.onChange(value => {
                 this.plugin.settings.endOfWeek = value
@@ -33,4 +39,15 @@ export class DateHopperSettingsTab extends PluginSettingTab {
         })
     
     }
+
+    addDaysToDropdown(dropdown: DropdownComponent) {
+        const options = LuxInfo.weekdays()
+        console.log(options)
+
+        options.forEach((day, i) => {
+            console.log(day, i)
+            dropdown.addOption(i.toString(), day)
+        })
+    }
 }
+
