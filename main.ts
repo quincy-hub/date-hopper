@@ -1,11 +1,12 @@
 import { MomentInput } from 'moment';
+import { DateHopperAlterCommands } from 'commands-alter';
 import { App, Editor, EditorPosition, MarkdownView, Modal, Notice, Plugin, PluginSettingTab, Setting, moment } from 'obsidian';
-// import { DateHopperSettingsTab } from 'settings';
-// import { DATEHOPPPER_VIEW_TYPE, DateHopperView } from 'view';
+import { DateHopperSettingsTab } from 'settings';
+import { DATEHOPPPER_VIEW_TYPE, DateHopperView } from 'view';
 
-// interface DateHopperPluginSettings {
-// 	endOfWeek: string
-// }
+interface DateHopperPluginSettings {
+	endOfWeek: string
+}
 
 interface EditorDateRange {
 	from: EditorPosition,
@@ -16,37 +17,37 @@ interface EditorDateRange {
 }
 
 
-// const DEFAULT_SETTINGS: Partial<DateHopperPluginSettings> = {
-// 	endOfWeek: 'Friday',
-// }
+const DEFAULT_SETTINGS: Partial<DateHopperPluginSettings> = {
+	endOfWeek: 'Friday',
+}
 
 
 export default class DateHopper extends Plugin {
-	// settings: DateHopperPluginSettings
+	settings: DateHopperPluginSettings
 
-	// async loadSettings() {
-	// 	// Bring data from data.json in the plugin directory, this creates a clone of the object so you don't update the defaults in the data.json file when you change settings.
-	// 	this.settings = Object.assign(
-	// 		{},
-	// 		DEFAULT_SETTINGS,
-	// 		await this.loadData()
-	// 	);
-	// }
+	async loadSettings() {
+		// Bring data from data.json in the plugin directory, this creates a clone of the object so you don't update the defaults in the data.json file when you change settings.
+		this.settings = Object.assign(
+			{},
+			DEFAULT_SETTINGS,
+			await this.loadData()
+		);
+	}
 
-	// async saveSettings(){
-	// 	this.saveData(this.settings)
-	// }
+	async saveSettings(){
+		this.saveData(this.settings)
+	}
 
 	async onload() {
-		// await this.loadSettings()
+		await this.loadSettings()
 		
-		// this.addSettingTab(new DateHopperSettingsTab(this.app, this))
+		this.addSettingTab(new DateHopperSettingsTab(this.app, this))
 		
-		// this.addRibbonIcon("eye", "Testing Settings", () => {
-		// 	this.openView()
-		// })
+		this.addRibbonIcon("eye", "Testing Settings", () => {
+			this.openView()
+		})
 		
-		// this.registerView(DATEHOPPPER_VIEW_TYPE, (leaf) => new DateHopperView(leaf))
+		this.registerView(DATEHOPPPER_VIEW_TYPE, (leaf) => new DateHopperView(leaf))
 		
 
 		// Status Bar
@@ -151,12 +152,12 @@ export default class DateHopper extends Plugin {
 		}
 	}
 
-	// openView() {
-	// 	this.app.workspace.detachLeavesOfType(DATEHOPPPER_VIEW_TYPE)
-	// 	const leaf = this.app.workspace.getRightLeaf(true)
-	// 	leaf.setViewState({type: DATEHOPPPER_VIEW_TYPE})
-	// 	this.app.workspace.revealLeaf(leaf)
-	// }
+	openView() {
+		this.app.workspace.detachLeavesOfType(DATEHOPPPER_VIEW_TYPE)
+		const leaf = this.app.workspace.getRightLeaf(true)
+		leaf.setViewState({type: DATEHOPPPER_VIEW_TYPE})
+		this.app.workspace.revealLeaf(leaf)
+	}
 
 	dateInRange(editor:Editor) {
 		const cursor = editor.getCursor()
