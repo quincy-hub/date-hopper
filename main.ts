@@ -5,6 +5,8 @@ import { addAlterCommands } from 'commands-alter';
 import { addInsertCommands } from 'commands-insert';
 
 interface DateHopperPluginSettings {
+    startOfWeek: string;
+    startOfWorkWeek: string;
 	endOfWeek: string,
 	endOfWorkWeek: string,
 }
