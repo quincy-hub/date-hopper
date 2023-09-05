@@ -21,8 +21,10 @@ interface EditorDateRange {
 
 
 const DEFAULT_SETTINGS: Partial<DateHopperPluginSettings> = {
-	endOfWeek: '5',
-	endOfWorkWeek: '4',
+	endOfWeek: '6',
+	endOfWorkWeek: '5',
+	startOfWeek: '7',
+	startOfWorkWeek: '1'
 }
 
 

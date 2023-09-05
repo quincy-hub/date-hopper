@@ -15,7 +15,18 @@ export class DateHopperSettingsTab extends PluginSettingTab {
         containerEl.empty();
 
         new Setting(containerEl)
-            .setName("End of Workweek Dropdown")
+        .setName("Start of Work Week")
+        .setDesc("Day to use for Start of work week")
+        .addDropdown(dropdown => {
+            this.addDaysToDropdown(dropdown)
+            dropdown.setValue(this.plugin.settings.startOfWorkWeek)
+            dropdown.onChange(value => {
+                this.plugin.settings.startOfWorkWeek = value
+                this.plugin.saveSettings()
+            })
+        })
+        new Setting(containerEl)
+            .setName("End of Work week")
             .setDesc("Day to use for End of work week")
             .addDropdown(dropdown => {
                 this.addDaysToDropdown(dropdown)
@@ -25,27 +36,15 @@ export class DateHopperSettingsTab extends PluginSettingTab {
                     this.plugin.saveSettings()
                 })
         })
-
+        
         new Setting(containerEl)
-        .setName("End of Week Dropdown")
+        .setName("End of Week")
         .setDesc("Day to use for End of week")
         .addDropdown(dropdown => {
             this.addDaysToDropdown(dropdown)
             dropdown.setValue(this.plugin.settings.endOfWeek)
             dropdown.onChange(value => {
                 this.plugin.settings.endOfWeek = value
-                this.plugin.saveSettings()
-            })
-        })
-        
-        new Setting(containerEl)
-        .setName("End Start of Work Week")
-        .setDesc("Day to use for Start of work week")
-        .addDropdown(dropdown => {
-            this.addDaysToDropdown(dropdown)
-            dropdown.setValue(this.plugin.settings.startOfWorkWeek)
-            dropdown.onChange(value => {
-                this.plugin.settings.startOfWorkWeek = value
                 this.plugin.saveSettings()
             })
         })
