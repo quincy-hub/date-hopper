@@ -20,6 +20,9 @@ Initial release, just getting started here.
 - Fixes typos
 - Adjusts settings order and defaults.
 
+## 1.0.4
+- Fixing more silly mistakes
+
 ## Known limiations (Future Plans)
 - No support for date formats other than YYYY-MM-DD
 - No support for adjusting dates when using multicursor selection.   Only the first date will update and the multi-cursor selection will be removed
